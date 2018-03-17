@@ -25,3 +25,6 @@ export type FOCUS_NEXT = typeof FOCUS_NEXT
 
 export const FOCUS_PREVIOUS = 'FOCUS_PREVIOUS'
 export type FOCUS_PREVIOUS = typeof FOCUS_PREVIOUS
+
+export const FOCUS_ITEM = 'FOCUS_ITEM'
+export type FOCUS_ITEM = typeof FOCUS_ITEM

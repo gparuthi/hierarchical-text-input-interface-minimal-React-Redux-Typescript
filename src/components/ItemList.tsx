@@ -12,10 +12,11 @@ export interface Props {
     onUpKeypress?: () => void;
     onDownKeypress?: () => void;
     onEdit?: (id:string, value:string) => void;
+    onClick?: (id: string) => void
 }
 
 export function ItemList({ items, onEdit, onEnterKeypress, onTabKeypress, 
-    onShiftTabKeypress, onDownKeypress, onUpKeypress }: Props) {
+    onShiftTabKeypress, onDownKeypress, onUpKeypress, onClick }: Props) {
 
     const onKeypress = (e: any) => {
         var key = e.key;
@@ -44,8 +45,11 @@ export function ItemList({ items, onEdit, onEnterKeypress, onTabKeypress,
     };
 
     const onChange = (e: React.FormEvent<HTMLInputElement>) => {
-        console.log(e.currentTarget)
         onEdit(e.currentTarget.id, e.currentTarget.value)
+    }
+
+    const onItemClicked = (e: React.FormEvent<HTMLInputElement>) => {
+        onClick(e.currentTarget.id)
     }
 
     return (
@@ -60,6 +64,7 @@ export function ItemList({ items, onEdit, onEnterKeypress, onTabKeypress,
                         id={'' + item.id}
                         onKeyDown={onKeypress}
                         onChange={onChange}
+                        onClick={onItemClicked}
                     />
                 </li>);
 

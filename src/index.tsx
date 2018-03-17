@@ -7,6 +7,7 @@ import { Provider } from 'react-redux';
 import { createStore } from 'redux';
 import { itemReducer } from './reducers';
 import { StoreState } from './types';
+// import {Test} from './test.js'
 
 const initialState = {
   byId: ['0', '1', '2'],
@@ -22,10 +23,22 @@ const initialState = {
 let devtools: any = window['devToolsExtension'] ? window['devToolsExtension']() : (f: any) => f;
 const store: any = devtools(createStore)(itemReducer, initialState as StoreState)
 
+export class App extends React.Component<any, any> {
+  constructor(props: any) {
+    super(props);
+  }
+
+  render() {
+    return (
+    <Provider store={store}>
+      <Hello />
+    </Provider>
+    )
+  }
+}
+
 ReactDOM.render(
-  <Provider store={store}>
-    <Hello />
-  </Provider>,
+  <App />,
   document.getElementById('root') as HTMLElement
 );
 registerServiceWorker();

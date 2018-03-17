@@ -24,7 +24,8 @@ export function mapDispatchToProps(dispatch: Dispatch<actions.ItemAction>) {
         onDownKeypress: () => dispatch(actions.focusNextItem()),
         removeItem: () => dispatch(actions.removeItem()),
         moveItem: (item: Item) => dispatch(actions.moveItem(item)),
-        copyItem: (item: Item) => dispatch(actions.copyItem(item))
+        copyItem: (item: Item) => dispatch(actions.copyItem(item)),
+        onClick: (id: string) => dispatch(actions.focusItem(id))
     };
 }
 

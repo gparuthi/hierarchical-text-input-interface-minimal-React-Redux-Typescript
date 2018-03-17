@@ -80,6 +80,12 @@ export function itemReducer(state: StoreState, action: actions.ItemAction): Stor
         currentId: nextId
       }
     }
+    case constants.FOCUS_ITEM: {
+      return {
+        ...state,
+        currentId: action.id
+      }
+    }
     case constants.REMOVE_ITEM:
     return { ...state }
     case constants.MOVE_ITEM:

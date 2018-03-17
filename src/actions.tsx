@@ -41,8 +41,13 @@ export interface CopyItem {
     payload: Item;
 }
 
+export interface FocusItem {
+    type: constants.FOCUS_ITEM;
+    id: string;
+}
+
 export type ItemAction = EditItem | AddNextItem | IndentItem | DeIndentItem | RemoveItem | 
-    MoveItem | CopyItem | FocusNext | FocusPrev;
+    MoveItem | CopyItem | FocusNext | FocusPrev | FocusItem;
 
 export function editItem(item: Item): EditItem {
     return { type: constants.EDIT_ITEM, payload: item };
@@ -78,4 +83,8 @@ export function focusNextItem(): FocusNext {
 
 export function focusPrevItem(): FocusPrev {
     return { type: constants.FOCUS_PREVIOUS };
+}
+
+export function focusItem(id: string): FocusItem {
+    return { type: constants.FOCUS_ITEM, id };
 }
