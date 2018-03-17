@@ -1,16 +1,17 @@
 // src/types/index.tsx
 
+interface Hash<T> {
+    [key: string]: T;
+}
 
 export interface Item {
-    id: number,
-    title: string
+    id: string;
+    title: string;
 }
 
 export interface StoreState {
-    byId: [0,1,2];
-    byHash: {
-        '0': { id: 0, title: "0" }
-        '1': { id: 1, title: "1" },
-        '2': { id: 2, title: "2" }
-    };
+    byId: Array<string>;
+    byHash: Hash<Item>;
+    indents: Hash<number>;
+    currentId: string;
 }

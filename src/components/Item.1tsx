@@ -1,0 +1,76 @@
+import * as React from "react";
+import { NodeHolder } from "../store/NodeHolder";
+
+type Context = {
+    node: NodeHolder,
+    onclick: any
+}
+
+type Props = {
+    id: number,
+    title: string,
+    depth: number,
+    getSelectedId: () => number,
+    onclick: (id:number) => void,
+
+}
+
+type State = {
+    title: "",
+    depth: number
+}
+
+export class Item extends React.Component<Props, any> {
+    _input:any
+
+    constructor(props: Props) {
+        super(props);
+        this.state = {
+            title: props.title,
+            depth: props.depth
+        };
+        this._handleChange = this._handleChange.bind(this);
+        this._handleRef = this._handleRef.bind(this);
+        this._handleClick = this._handleClick.bind(this);
+    }
+    componentDidUpdate() {
+        if (this.props.getSelectedId() == this.props.id) {
+            this._input.focus()
+        }   
+    }
+    componentDidMount() {
+        this._input.focus();
+    }
+    _handleChange(event: any) {
+        // Dispatch event on change
+        // this.state.title = event.target.value
+        // this.setState({node: this.state.node})
+    }
+    _handleRef(c:any) {
+        this._input = c;
+    }
+    _handleClick(e:any){
+        this.props.onclick(this.props.id)
+    }
+    render() {
+            var liClassName = ((a: number) => {
+                switch (a) {
+                    case 2: return "indent1"
+                    case 3: return "indent2"
+                    case 4: return "indent3"
+                    default: return "indent0"
+                }
+            })(this.state.depth)
+
+            liClassName += " item"
+            return (
+                <li className={liClassName} key={this.state.node.tid}>
+                    <input ref={this._handleRef} 
+                    className="itemText" 
+                    value={this.state.title} 
+                    onChange={this._handleChange} 
+                    onClick={this._handleClick}
+                    type="title" id="hiddenInput"></input>
+                </li>)
+    }
+}
