@@ -4,9 +4,16 @@ import * as actions from './actions';
 import { StoreState } from './types';
 import * as constants from './constants';
 
-const generateKey = (pre:string) => {
+export const generateKey = (pre:string) => {
   return `${pre}_${new Date().getTime()}`;
 }
+
+const move = (arr:Array<any>, from:number, to:number, isCopy = true) => {
+  const clone = [...arr];
+  const moved = isCopy ? clone[from] : clone.splice(from, 1)[0]
+  clone.splice(to, 0, moved);
+  return clone;
+};
 
 export function itemReducer(state: StoreState, action: actions.ItemAction): StoreState {
   switch (action.type) {
@@ -20,7 +27,7 @@ export function itemReducer(state: StoreState, action: actions.ItemAction): Stor
       }
     }
     case constants.ADD_NEXT_ITEM:{
-      const item = { id: generateKey('item'), title:''}
+      const item = { id: generateKey('itemc'), title:''}
       const currentNodeIndex = state.byId.findIndex(id => (id===state.currentId))
       const indent = state.indents[state.currentId]
       return {
@@ -88,10 +95,12 @@ export function itemReducer(state: StoreState, action: actions.ItemAction): Stor
     }
     case constants.REMOVE_ITEM:
     return { ...state }
-    case constants.MOVE_ITEM:
-    return { ...state }
-    case constants.COPY_ITEM:
-    return { ...state }
+    case constants.MOVE_ITEM:{
+      return { 
+        ...state,
+        byId: move(state.byId, action.payload.sourceIndex, action.payload.destinationIndex+1)
+      }
+    }
     
     // case INCREMENT_ENTHUSIASM:
     //   return { ...state, enthusiasmLevel: state.enthusiasmLevel + 1 };

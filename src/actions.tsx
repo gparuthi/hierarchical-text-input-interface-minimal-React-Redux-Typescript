@@ -25,7 +25,11 @@ export interface RemoveItem {
 
 export interface MoveItem {
     type: constants.MOVE_ITEM;
-    payload: Item;
+    payload: {
+        sourceIndex: number,
+        destinationIndex: number,
+        isCopied: boolean
+    };
 }
 
 export interface FocusNext {
@@ -36,18 +40,13 @@ export interface FocusPrev {
     type: constants.FOCUS_PREVIOUS;
 }
 
-export interface CopyItem {
-    type: constants.COPY_ITEM;
-    payload: Item;
-}
-
 export interface FocusItem {
     type: constants.FOCUS_ITEM;
     id: string;
 }
 
 export type ItemAction = EditItem | AddNextItem | IndentItem | DeIndentItem | RemoveItem | 
-    MoveItem | CopyItem | FocusNext | FocusPrev | FocusItem;
+    MoveItem | FocusNext | FocusPrev | FocusItem;
 
 export function editItem(item: Item): EditItem {
     return { type: constants.EDIT_ITEM, payload: item };
@@ -69,12 +68,9 @@ export function removeItem(): RemoveItem {
     return { type: constants.REMOVE_ITEM };
 }
 
-export function moveItem(item: Item): MoveItem {
-    return { type: constants.MOVE_ITEM, payload: item };
-}
-
-export function copyItem(item: Item): CopyItem {
-    return { type: constants.COPY_ITEM, payload: item };
+export function moveItem(sourceIndex: number, destinationIndex: number, isCopied: boolean): MoveItem {
+    return { type: constants.MOVE_ITEM, 
+        payload: {sourceIndex: sourceIndex, destinationIndex: destinationIndex, isCopied: isCopied} };
 }
 
 export function focusNextItem(): FocusNext {
