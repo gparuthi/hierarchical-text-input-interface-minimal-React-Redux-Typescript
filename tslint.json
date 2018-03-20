@@ -18,7 +18,7 @@
         "forin": true,
         "indent": [ true, "spaces" ],
         "interface-name": [true, "never-prefix"],
-        "jsdoc-format": true,
+        "jsdoc-format": false,
         "jsx-no-lambda": false,
         "jsx-no-multiline-js": false,
         "label-position": true,
@@ -46,7 +46,7 @@
         "no-construct": true,
         "no-debugger": true,
         "no-duplicate-variable": true,
-        "no-empty": true,
+        "no-empty": false,
         "no-eval": true,
         "no-shadowed-variable": false,
         "no-string-literal": false,
@@ -69,7 +69,7 @@
 
         "triple-equals": [ true, "allow-null-check" ],
         "typedef": [
-            true,
+            false,
             "parameter",
             "property-declaration"
         ],

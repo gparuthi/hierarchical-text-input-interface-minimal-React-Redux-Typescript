@@ -1,17 +1,9 @@
-// src/types/index.tsx
+import { Session } from './model';
 
-interface Hash<T> {
-    [key: string]: T;
-}
-
-export interface Item {
-    id: string;
-    title: string;
-}
+export interface Item { id: string; title: string; indent: number; }
 
 export interface StoreState {
-    byId: Array<string>;
-    byHash: Hash<Item>;
-    indents: Hash<number>;
+    session: Session; 
+    itemList: Array<Item>;
     currentId: string;
 }

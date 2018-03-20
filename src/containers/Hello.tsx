@@ -4,11 +4,11 @@ import { StoreState, Item } from '../types';
 import { connect, Dispatch } from 'react-redux';
 
 export function mapStateToProps(storeState: StoreState): Props {
-    const items = storeState.byId.map((id: string) => {
+    console.log(storeState)
+    const items = storeState.itemList.map((item: Item) => {
         return {
-            ...storeState.byHash[id],
-            ['indent']: storeState.indents[id],
-            ['autoFocus']: ((id === storeState.currentId) ? true : false)
+            ...item,
+            ['autoFocus']: ((item.id === storeState.currentId) ? true : false)
         }
     })
     return { items: items }
@@ -16,7 +16,7 @@ export function mapStateToProps(storeState: StoreState): Props {
 
 export function mapDispatchToProps(dispatch: Dispatch<actions.ItemAction>) {
     return {
-        onEdit: (id: string, value: string) => dispatch(actions.editItem({id: id, title: value})),
+        onEdit: (id: string, value: string) => dispatch(actions.editItem(id, value)),
         onEnterKeypress: (item: Item) => dispatch(actions.addNextItem(item)),
         onTabKeypress: () => dispatch(actions.indentItem()),
         onShiftTabKeypress: () => dispatch(actions.deIndentItem()),

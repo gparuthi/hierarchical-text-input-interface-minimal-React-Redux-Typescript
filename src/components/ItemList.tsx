@@ -16,7 +16,7 @@ const getItemStyle = (isDragging: boolean, draggableStyle: any) => ({
 export const generateKey = (pre:string) => {
   return `${pre}_${new Date().getTime()}`;
 }
-
+ 
 export interface Props {
     items: Array<Item>; // title, indent, id
     onEnterKeypress?: () => void;
@@ -73,7 +73,7 @@ export function ItemList({ items, onEdit, onEnterKeypress, onTabKeypress,
                 return;
             }
 
-            onMove(result.source.index, result.destination.index)
+            onMove(result.source.index, result.destination.index-1)
         }
         
         return (

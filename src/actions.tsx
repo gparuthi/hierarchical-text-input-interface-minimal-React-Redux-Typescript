@@ -3,7 +3,10 @@ import { Item } from './types';
 
 export interface EditItem {
     type: constants.EDIT_ITEM;
-    payload: Item
+    payload: {
+        id: string,
+        title: string
+    }
 }
 
 export interface AddNextItem {
@@ -48,8 +51,8 @@ export interface FocusItem {
 export type ItemAction = EditItem | AddNextItem | IndentItem | DeIndentItem | RemoveItem | 
     MoveItem | FocusNext | FocusPrev | FocusItem;
 
-export function editItem(item: Item): EditItem {
-    return { type: constants.EDIT_ITEM, payload: item };
+export function editItem(id: string, title: string): EditItem {
+    return { type: constants.EDIT_ITEM, payload: { id: id, title: title } };
 }
 
 export function addNextItem(item: Item): AddNextItem {
